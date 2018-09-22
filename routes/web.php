@@ -11,16 +11,15 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/', function() {
+    return redirect(route('login'));
 });
-
-Route::resource('/kategori', 'CategoryController')->except([
-    'create', 'show'
-]);
-
-Route::resource('/produk', 'ProductController');
-
 Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
+Route::group(['middleware' => 'auth'], function() { //mengecek authentication user
+    Route::resource('/kategori', 'CategoryController')->except([
+        'create', 'show'
+    ]);
+    Route::resource('/produk', 'ProductController');
+    Route::get('/home', 'HomeController@index')->name('home');
+    
+});
