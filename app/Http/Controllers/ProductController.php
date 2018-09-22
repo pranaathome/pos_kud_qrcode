@@ -84,4 +84,18 @@ class ProductController extends Controller
         //mengembalikan nama file yang ditampung divariable $images
         return $images;
     }
+
+    public function destroy($id)
+    {
+        //query select berdasarkan id
+        $products = Product::findOrFail($id);
+        //mengecek, jika field photo tidak null / kosong
+        if (!empty($products->photo)) {
+            //file akan dihapus dari folder uploads/produk
+            File::delete(public_path('uploads/product/' . $products->photo));
+        }
+        //hapus data dari table
+        $products->delete();
+        return redirect()->back()->with(['success' => '<strong>' . $products->name . '</strong> Telah Dihapus!']);
+    }
 }
