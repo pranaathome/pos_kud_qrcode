@@ -23,3 +23,8 @@ Route::group(['middleware' => 'auth'], function() { //mengecek authentication us
     Route::get('/home', 'HomeController@index')->name('home');
     
 });
+//cara lain cek auth, menambahkan ini disetiap controller
+/*public function __construct()
+{
+    $this->middleware('auth);
+}*/
