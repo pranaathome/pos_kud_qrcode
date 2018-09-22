@@ -98,4 +98,13 @@ class ProductController extends Controller
         $products->delete();
         return redirect()->back()->with(['success' => '<strong>' . $products->name . '</strong> Telah Dihapus!']);
     }
+
+    public function edit($id)
+    {
+        //query select berdasarkan id
+        $product = Product::findOrFail($id);
+        $categories = Category::orderBy('name', 'ASC')->get();
+        return view('products.edit', compact('product', 'categories'));
+    }
+    
 }
