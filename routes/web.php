@@ -21,6 +21,11 @@ Route::group(['middleware' => 'auth'], function() { //mengecek authentication us
     ]);
     Route::resource('/produk', 'ProductController');
     Route::get('/home', 'HomeController@index')->name('home');
+
+    Route::resource('/role', 'RoleController')->except([
+        'create', 'show', 'edit', 'update'
+    ]);
+    
     
 });
 //cara lain cek auth, menambahkan ini disetiap controller
