@@ -19,6 +19,10 @@ Route::group(['middleware' => 'auth'], function() {
     //Route yang berada dalam group ini hanya dapat diakses oleh user
     //yang memiliki role admin
     Route::group(['middleware' => ['role:admin']], function () {
+        Route::resource('/kategori', 'CategoryController')->except([
+            'create', 'show'
+        ]);
+        Route::resource('/produk', 'ProductController');
         Route::resource('/role', 'RoleController')->except([
             'create', 'show', 'edit', 'update'
         ]);
@@ -45,7 +49,10 @@ Route::group(['middleware' => 'auth'], function() {
     
     //route group untuk kasir
     Route::group(['middleware' => ['role:kasir']], function() {
-        
+        Route::resource('/kategori', 'CategoryController')->except([
+            'create', 'show'
+        ]);
+        Route::resource('/produk', 'ProductController');
     });
     
     //home kita taruh diluar group karena semua jenis user yg login bisa mengaksesnya
