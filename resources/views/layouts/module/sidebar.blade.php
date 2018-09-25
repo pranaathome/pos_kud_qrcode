@@ -29,7 +29,7 @@
                         </p>
                     </a>
                 </li>
-                
+
                 @if (auth()->user()->can('show products') || auth()->user()->can('delete products') || auth()->user()->can('create products'))
                 <li class="nav-item has-treeview">
                     <a href="#" class="nav-link">
