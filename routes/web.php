@@ -25,6 +25,10 @@ Route::group(['middleware' => 'auth'], function() { //mengecek authentication us
     Route::resource('/role', 'RoleController')->except([
         'create', 'show', 'edit', 'update'
     ]);
+    Route::resource('/users', 'UserController')->except([
+        'show'
+    ]);
+    Route::get('/users/roles/{id}', 'UserController@roles')->name('users.roles');
     
     
 });
