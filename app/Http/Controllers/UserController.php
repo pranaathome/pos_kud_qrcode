@@ -100,4 +100,35 @@ class UserController extends Controller
         return view('users.role_permission', compact('roles', 'permissions', 'hasPermission'));
     }
 
+    public function addPermission(Request $request)
+    {
+        $this->validate($request, [
+            'name' => 'required|string|unique:permissions'
+        ]);
+
+        $permission = Permission::firstOrCreate([
+            'name' => $request->name
+        ]);
+        return redirect()->back();
+    }
+
+    public function setRolePermission(Request $request, $role)
+    {
+        //select role berdasarkan namanya
+        $role = Role::findByName($role);
+        
+        //fungsi syncPermission akan menghapus semua permissio yg dimiliki role tersebut
+        //kemudian di-assign kembali sehingga tidak terjadi duplicate data
+        $role->syncPermissions($request->permission);
+        return redirect()->back()->with(['success' => 'Permission to Role Saved!']);
+    }
+
+    public function roles(Request $request, $id)
+    {
+        $user = User::findOrFail($id);
+        $roles = Role::all()->pluck('name');
+        return view('users.roles', compact('user', 'roles'));
+    }
+
+
 }
