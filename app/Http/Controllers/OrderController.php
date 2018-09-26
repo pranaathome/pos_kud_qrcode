@@ -12,4 +12,12 @@ class OrderController extends Controller
         $products = Product::orderBy('created_at', 'DESC')->get();
         return view('orders.add', compact('products'));
     }
+
+    public function getProduct($id)
+    {
+        $products = Product::findOrFail($id);
+        return response()->json($products, 200);
+    }
+    
+
 }
