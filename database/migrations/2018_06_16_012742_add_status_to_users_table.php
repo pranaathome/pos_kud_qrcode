@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddFieldPhotoToProductsTable extends Migration
+class AddStatusToUsersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,8 @@ class AddFieldPhotoToProductsTable extends Migration
      */
     public function up()
     {
-        Schema::table('products', function (Blueprint $table) {
-            $table->string('code')->unique()->after('id');
-            $table->string('photo')->nullable()->after('category_id');
+        Schema::table('users', function (Blueprint $table) {
+            $table->boolean('status')->default(false)->after('password');
         });
     }
 
@@ -26,8 +25,6 @@ class AddFieldPhotoToProductsTable extends Migration
      */
     public function down()
     {
-        Schema::table('products', function (Blueprint $table) {
-            //
-        });
+
     }
 }

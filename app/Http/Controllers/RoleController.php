@@ -19,7 +19,7 @@ class RoleController extends Controller
             'name' => 'required|string|max:50'
         ]);
 
-        $role = Role::firstOrCreate(['name' => $request->name]); //guard default "web"
+        $role = Role::firstOrCreate(['name' => $request->name]);
         return redirect()->back()->with(['success' => 'Role: <strong>' . $role->name . '</strong> Ditambahkan']);
     }
 

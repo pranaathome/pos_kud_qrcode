@@ -1,9 +1,9 @@
 @extends('layouts.master')
-​
+
 @section('title')
     <title>Tambah Data Produk</title>
 @endsection
-​
+
 @section('content')
     <div class="content-wrapper">
         <div class="content-header">
@@ -22,7 +22,7 @@
                 </div>
             </div>
         </div>
-​
+
         <section class="content">
             <div class="container-fluid">
                 <div class="row">
@@ -32,9 +32,9 @@
                             
                             @endslot
                             
-                            @if (session('success'))
-                                @alert(['type' => 'success'])
-                                    {!! session('success') !!}
+                            @if (session('error'))
+                                @alert(['type' => 'danger'])
+                                    {!! session('error') !!}
                                 @endalert
                             @endif
                             <form action="{{ route('produk.store') }}" method="post" enctype="multipart/form-data">
@@ -94,7 +94,7 @@
                                 </div>
                             </form>
                             @slot('footer')
-​
+
                             @endslot
                         @endcard
                     </div>

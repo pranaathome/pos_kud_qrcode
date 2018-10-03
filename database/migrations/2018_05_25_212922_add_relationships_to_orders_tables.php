@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddRelationshipsToOrdersTable extends Migration
+class AddRelationshipsToOrdersTables extends Migration
 {
     /**
      * Run the migrations.
@@ -17,7 +17,7 @@ class AddRelationshipsToOrdersTable extends Migration
             $table->integer('customer_id')->unsigned()->change();
             $table->foreign('customer_id')->references('id')->on('customers')
                 ->onUpdate('cascade')->onDelete('cascade');
-                
+            
             $table->integer('user_id')->unsigned()->change();
             $table->foreign('user_id')->references('id')->on('users')
                 ->onUpdate('cascade')->onDelete('cascade');
@@ -31,7 +31,6 @@ class AddRelationshipsToOrdersTable extends Migration
      */
     public function down()
     {
-        //relasi customer -> orders
         Schema::table('orders', function(Blueprint $table) {
             $table->dropForeign('orders_customer_id_foreign');
         });
@@ -54,7 +53,6 @@ class AddRelationshipsToOrdersTable extends Migration
 
         Schema::table('orders', function(Blueprint $table) {
             $table->integer('user_id')->change();
-        }); 
-        
+        });
     }
 }

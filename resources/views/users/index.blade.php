@@ -1,9 +1,9 @@
 @extends('layouts.master')
-​
+
 @section('title')
     <title>Manajemen User</title>
 @endsection
-​
+
 @section('content')
     <div class="content-wrapper">
         <div class="content-header">
@@ -21,7 +21,7 @@
                 </div>
             </div>
         </div>
-​
+
         <section class="content">
             <div class="container-fluid">
                 <div class="row">
@@ -87,7 +87,7 @@
                                 </table>
                             </div>
                             @slot('footer')
-​
+
                             @endslot
                         @endcard
                     </div>

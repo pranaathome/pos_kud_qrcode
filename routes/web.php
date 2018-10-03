@@ -15,7 +15,7 @@ Route::get('/', function() {
 });
 Auth::routes();
 Route::group(['middleware' => 'auth'], function() {
-    
+
     //Route yang berada dalam group ini hanya dapat diakses oleh user
     //yang memiliki role admin
     Route::group(['middleware' => ['role:admin']], function () {
@@ -32,8 +32,7 @@ Route::group(['middleware' => 'auth'], function() {
         Route::get('/users/role-permission', 'UserController@rolePermission')->name('users.roles_permission');
         Route::put('/users/permission/{role}', 'UserController@setRolePermission')->name('users.setRolePermission');
     });
-    
-    
+
     //route yang berada dalam group ini, hanya bisa diakses oleh user
     //yang memiliki permission yang telah disebutkan dibawah
     Route::group(['middleware' => ['permission:show products|create products|delete products']], function() {
@@ -42,19 +41,12 @@ Route::group(['middleware' => 'auth'], function() {
         ]);
         Route::resource('/produk', 'ProductController');
     });
-    
+
     //route group untuk kasir
     Route::group(['middleware' => ['role:kasir']], function() {
         Route::get('/transaksi', 'OrderController@addOrder')->name('order.transaksi');
+        Route::get('/checkout', 'OrderController@checkout')->name('order.checkout');
     });
-    
-    //home kita taruh diluar group karena semua jenis user yg login bisa mengaksesnya
+
     Route::get('/home', 'HomeController@index')->name('home');
 });
-
-
-//cara lain cek auth, menambahkan ini disetiap controller
-/*public function __construct()
-{
-    $this->middleware('auth);
-}*/

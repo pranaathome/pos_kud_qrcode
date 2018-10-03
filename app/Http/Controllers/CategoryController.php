@@ -15,26 +15,22 @@ class CategoryController extends Controller
 
     public function store(Request $request)
     {
-
-        //form validation
+        //validasi form
         $this->validate($request, [
             'name' => 'required|string|max:50',
             'description' => 'nullable|string'
         ]);
 
         try {
-            //firstOrCreate jika nama kategori sudah ada, maka record tersebut hanya diselect tidak di add
             $categories = Category::firstOrCreate([
                 'name' => $request->name
             ], [
                 'description' => $request->description
             ]);
-
-            //flash message
             return redirect()->back()->with(['success' => 'Kategori: ' . $categories->name . ' Ditambahkan']);
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
             return redirect()->back()->with(['error' => $e->getMessage()]);
-        }        
+        }
     }
 
     public function destroy($id)
@@ -57,22 +53,16 @@ class CategoryController extends Controller
             'name' => 'required|string|max:50',
             'description' => 'nullable|string'
         ]);
-        
+
         try {
-            //select data berdasarkan id
             $categories = Category::findOrFail($id);
-            //update data
             $categories->update([
                 'name' => $request->name,
                 'description' => $request->description
             ]);
-            
-            //redirect ke route kategori.index
             return redirect(route('kategori.index'))->with(['success' => 'Kategori: ' . $categories->name . ' Ditambahkan']);
         } catch (\Exception $e) {
-            //jika gagal, redirect ke form yang sama lalu membuat flash message error
             return redirect()->back()->with(['error' => $e->getMessage()]);
         }
     }
-
 }

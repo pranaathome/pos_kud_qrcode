@@ -1,9 +1,9 @@
 @extends('layouts.master')
-​
+
 @section('title')
     <title>Manajemen Produk</title>
 @endsection
-​
+
 @section('content')
     <div class="content-wrapper">
         <div class="content-header">
@@ -21,7 +21,7 @@
                 </div>
             </div>
         </div>
-​
+
         <section class="content">
             <div class="container-fluid">
                 <div class="row">
@@ -53,7 +53,6 @@
                                             <th>Aksi</th>
                                         </tr>
                                     </thead>
-
                                     <tbody>
                                         @forelse ($products as $row)
                                         <tr>
@@ -94,12 +93,12 @@
                                         @endforelse
                                     </tbody>
                                 </table>
-                                <div class="float-right">
-                                    {!! $products->links() !!}
-                                </div>
+                            </div>
+                            <div class="float-right">
+                                {!! $products->links() !!}
                             </div>
                             @slot('footer')
-​
+
                             @endslot
                         @endcard
                     </div>

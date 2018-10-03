@@ -1,14 +1,14 @@
 @extends('layouts.auth')
-​
+
 @section('title')
     <title>Login</title>
 @endsection
-​
+
 @section('content')
     <div class="card">
         <div class="card-body login-card-body">
             <p class="login-box-msg">Sign in to start your session</p>
-​
+
             <form method="POST" action="{{ route('login') }}">
                 @csrf
                 @if (session('error'))
@@ -44,7 +44,7 @@
                     </div>
                 </div>
             </form>
-​
+
             <div class="social-auth-links text-center mb-3">
                 <p>- OR -</p>
                 <a href="#" class="btn btn-block btn-primary">
@@ -54,7 +54,7 @@
                     <i class="fa fa-google-plus mr-2"></i> Sign in using Google+
                 </a>
             </div>
-​
+
             <p class="mb-1">
                 <a href="#">I forgot my password</a>
             </p>

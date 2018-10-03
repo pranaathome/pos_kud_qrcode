@@ -1,9 +1,9 @@
 @extends('layouts.master')
-​
+
 @section('title')
     <title>Edit Kategori</title>
 @endsection
-​
+
 @section('content')
     <div class="content-wrapper">
         <div class="content-header">
@@ -22,7 +22,7 @@
                 </div>
             </div>
         </div>
-​
+
         <section class="content">
             <div class="container-fluid">
                 <div class="row">
@@ -37,7 +37,7 @@
                                     {!! session('error') !!}
                                 @endalert
                             @endif
-​
+
                             <form role="form" action="{{ route('kategori.update', $categories->id) }}" method="POST">
                                 @csrf
                                 <input type="hidden" name="_method" value="PUT">

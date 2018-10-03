@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddRelationshipsToProductsTable extends Migration
+class AddRelationshipsToProductTables extends Migration
 {
     /**
      * Run the migrations.
@@ -27,15 +27,15 @@ class AddRelationshipsToProductsTable extends Migration
      */
     public function down()
     {
-        Schema::table('products', function (Blueprint $table) {
+        Schema::table('products', function(Blueprint $table) {
             $table->dropForeign('products_category_id_foreign');
         });
 
-        Schema::table('products', function (Blueprint $table) {
+        Schema::table('products', function(Blueprint $table) {
             $table->dropIndex('products_category_id_foreign');
         });
 
-        Schema::table('products', function (Blueprint $table) {
+        Schema::table('products', function(Blueprint $table) {
             $table->integer('category_id')->change();
         });
     }
