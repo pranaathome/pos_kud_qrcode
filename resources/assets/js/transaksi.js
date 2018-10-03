@@ -2,9 +2,12 @@ import Vue from 'vue'
 import axios from 'axios'
 import VueSweetalert2 from 'vue-sweetalert2';
 
+//import sweetalert
 Vue.filter('currency', function (money) {
     return accounting.formatMoney(money, "Rp ", 2, ".", ",")
 })
+
+//use sweetalert
 Vue.use(VueSweetalert2);
 
 new Vue({
@@ -16,6 +19,8 @@ new Vue({
             name: '',
             photo: ''
         },
+
+        //menambahkan cart
         cart: {
             product_id: '',
             qty: 1
@@ -23,8 +28,10 @@ new Vue({
         customer: {
             email: ''
         },
+        //menampung list cart
         shoppingCart: [],
         submitCart: false,
+        
         formCustomer: false,
         resultStatus: false,
         submitForm: false,
