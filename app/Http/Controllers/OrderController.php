@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Product;
+use App\Order;
+use App\Order_detail;
+use Cookie;
+use DB;
 
 class OrderController extends Controller
 {
@@ -17,6 +21,23 @@ class OrderController extends Controller
     {
         $products = Product::findOrFail($id);
         return response()->json($products, 200);
+    }
+
+    public function generateInvoice()
+    {
+        //mengambil data dari table orders
+        $order = Order::orderBy('created_at', 'DESC');
+        //jika sudah terdapat records
+        if ($order->count() > 0) {
+            //mengambil data pertama yang sdh dishort DESC
+            $order = $order->first();
+            //explode invoice untuk mendapatkan angkanya
+            $explode = explode('-', $order->invoice);
+            //angka dari hasil explode di +1
+            return 'INV-' . $explode[1] + 1;
+        }
+        //jika belum terdapat records maka akan me-return INV-1
+        return 'INV-1';
     }
     
     public function addToCart(Request $request)
@@ -155,6 +176,7 @@ class OrderController extends Controller
             'message' => $e->getMessage()
         ], 400);
     }
+
 }
 
 }
