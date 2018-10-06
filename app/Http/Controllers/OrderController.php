@@ -76,4 +76,9 @@ class OrderController extends Controller
         return response()->json($cart, 200)->cookie('cart', json_encode($cart), 120);
     }
 
+    public function checkout()
+    {
+        return view('orders.checkout');
+    }
+
 }
