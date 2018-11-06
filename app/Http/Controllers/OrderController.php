@@ -11,6 +11,7 @@ use Cookie;
 use DB;
 use Carbon\Carbon;
 use App\User;
+use PDF;
 
 class OrderController extends Controller
 {
@@ -287,6 +288,14 @@ class OrderController extends Controller
     
     public function invoicePdf($invoice)
     {
+    //MENGAMBIL DATA TRANSAKSI BERDASARKAN INVOICE
+    $order = Order::where('invoice', $invoice)
+            ->with('customer', 'order_detail', 'order_detail.product')->first();
+    //SET CONFIG PDF MENGGUNAKAN FONT SANS-SERIF
+    //DENGAN ME-LOAD VIEW INVOICE.BLADE.PHP
+    $pdf = PDF::setOptions(['dpi' => 150, 'defaultFont' => 'sans-serif'])
+        ->loadView('orders.report.invoice', compact('order'));
+    return $pdf->stream();
 
     }
     

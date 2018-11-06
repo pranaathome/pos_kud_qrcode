@@ -31,9 +31,7 @@ Route::group(['middleware' => 'auth'], function() {
         Route::post('/users/permission', 'UserController@addPermission')->name('users.add_permission');
         Route::get('/users/role-permission', 'UserController@rolePermission')->name('users.roles_permission');
         Route::put('/users/permission/{role}', 'UserController@setRolePermission')->name('users.setRolePermission');
-        Route::get('/order', 'OrderController@index')->name('order.index');
-        Route::get('/order/pdf/{invoice}', 'OrderController@invoicePdf')->name('order.pdf');
-        Route::get('/order/excel/{invoice}', 'OrderController@invoiceExcel')->name('order.excel');
+
     });
 
     //route yang berada dalam group ini, hanya bisa diakses oleh user
@@ -44,6 +42,13 @@ Route::group(['middleware' => 'auth'], function() {
         ]);
         Route::resource('/produk', 'ProductController');
     });
+
+    Route::group(['middleware' => ['role:admin,kasir']], function() {
+        Route::get('/order', 'OrderController@index')->name('order.index');
+        Route::get('/order/pdf/{invoice}', 'OrderController@invoicePdf')->name('order.pdf');
+        Route::get('/order/excel/{invoice}', 'OrderController@invoiceExcel')->name('order.excel');
+    });
+
 
     //route group untuk kasir
     Route::group(['middleware' => ['role:kasir']], function() {
