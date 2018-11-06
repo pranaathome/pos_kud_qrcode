@@ -9,6 +9,7 @@ class Order extends Model
     protected $guarded = [];
     protected $dates = ['created_at'];
     
+    //Model relationships ke Order_detail menggunakan hasMany
     public function order_detail()
     {
         return $this->hasMany(Order_detail::class);

@@ -31,6 +31,9 @@ Route::group(['middleware' => 'auth'], function() {
         Route::post('/users/permission', 'UserController@addPermission')->name('users.add_permission');
         Route::get('/users/role-permission', 'UserController@rolePermission')->name('users.roles_permission');
         Route::put('/users/permission/{role}', 'UserController@setRolePermission')->name('users.setRolePermission');
+        Route::get('/order', 'OrderController@index')->name('order.index');
+        Route::get('/order/pdf/{invoice}', 'OrderController@invoicePdf')->name('order.pdf');
+        Route::get('/order/excel/{invoice}', 'OrderController@invoiceExcel')->name('order.excel');
     });
 
     //route yang berada dalam group ini, hanya bisa diakses oleh user
@@ -47,6 +50,9 @@ Route::group(['middleware' => 'auth'], function() {
         Route::get('/transaksi', 'OrderController@addOrder')->name('order.transaksi');
         Route::get('/checkout', 'OrderController@checkout')->name('order.checkout');
         Route::post('/checkout', 'OrderController@storeOrder')->name('order.storeOrder');
+        Route::get('/order', 'OrderController@index')->name('order.index');
+        Route::get('/order/pdf/{invoice}', 'OrderController@invoicePdf')->name('order.pdf');
+        Route::get('/order/excel/{invoice}', 'OrderController@invoiceExcel')->name('order.excel');
     });
 
     Route::get('/home', 'HomeController@index')->name('home');
