@@ -1,7 +1,5 @@
 <?php
-
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
 use App\Product;
 use App\Customer;
@@ -9,7 +7,6 @@ use App\Order;
 use App\User;
 use Carbon\Carbon;
 use DB;
-
 class HomeController extends Controller
 {
     public function index()
@@ -20,7 +17,6 @@ class HomeController extends Controller
         $user = User::count();
         return view('home', compact('product', 'order', 'customer', 'user'));
     }
-
     public function getChart()
     {
         $start = Carbon::now()->subWeek()->addDay()->format('Y-m-d') . ' 00:00:01';
@@ -30,7 +26,6 @@ class HomeController extends Controller
             ->whereBetween('created_at', [$start, $end])
             ->groupBy('created_at')    
             ->get()->pluck('total_order', 'order_date')->all();
-
         for ($i = Carbon::now()->subWeek()->addDay(); $i <= Carbon::now(); $i->addDay()) {
             if (array_key_exists($i->format('Y-m-d'), $order)) {
                 $data[$i->format('Y-m-d')] = $order[$i->format('Y-m-d')];
