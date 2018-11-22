@@ -82,6 +82,7 @@
         <table class="layout display responsive-table">
             <thead>
                 <tr>
+                    {{-- <th>QRCode</th> --}}
                     <th>#</th>
                     <th>Produk</th>
                     <th>Harga</th>
